@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPA | RECONHECIMENTO FACIAL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reconhecimento Facial - Operários Pela Arte</h1>
+
+        <div id="messageBox" style="display: none;"></div>
+
+        <form id="uploadForm">
+            <label for="fileInput">Selecione uma foto</label>
+            <input type="file" id="fileInput" accept="image/*" required>
+            <button type="submit">Enviar foto</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
