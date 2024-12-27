@@ -2,7 +2,7 @@
     "membros": [
         {
             "nome": "Rafael Dias",
-            "foto": "app/static/img/3x4 rafael.jpg"
+            "foto": "app/static/img/rafael.jpg"
         },
         {
             "nome": "Maria Clara",
@@ -11,6 +11,14 @@
         {
             "nome": "Kauan César",
             "foto":"app/static/img/cesar.jpeg"
+        },
+        {
+            "nome": "Gabrielle Stephanie",
+            "foto":"app/static/img/gabrielle.jpeg"
+        },
+        {
+            "nome": "Lunna",
+            "foto":"app/static/img/lunna.jpeg"
         }
     ]
 }

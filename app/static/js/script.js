@@ -4,12 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageBox = document.getElementById("messageBox");
     const listaPresencas = document.getElementById("listaPresenca");
     const btnEnviarPDF = document.getElementById("btnEnviarPDF");
+    const btnEnviarFoto = document.getElementById("btnEnviarFoto");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
+        btnEnviarFoto.disabled = true;
+        btnEnviarPDF.disabled = true;
+
         if (!fileInput.files[0]) {
             displayMessage("Por favor, selecione uma foto!", "error");
+            btnEnviarFoto.disabled = false;
+            btnEnviarPDF.disabled = false;
             return;
         }
 
@@ -32,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Erro ao processar a solicitação:", error);
             displayMessage("Erro ao enviar a foto. Tente novamente!", "error");
+        } finally {
+            btnEnviarFoto.disabled = false;
+            btnEnviarPDF = false;
         }
     });
 

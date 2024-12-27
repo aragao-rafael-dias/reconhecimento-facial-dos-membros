@@ -1,0 +1,132 @@
+/* Resetando margens e preenchimentos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Título principal */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Formulário de envio de foto */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Estilo para o input de arquivo */
+#fileInput {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Botão de envio */
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Caixa de mensagem (erro/sucesso) */
+#messageBox {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: none;
+}
+
+#messageBox.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+#messageBox.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Estilo para a lista de presentes */
+ul#listaPresentes {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+ul#listaPresentes li {
+    background-color: #fff;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+ul#listaPresentes li:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+        width: 100%;
+    }
+
+    #fileInput, button {
+        width: 100%;
+    }
+
+    ul#listaPresentes li {
+        font-size: 14px;
+    }
+}
