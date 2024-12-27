@@ -6,6 +6,7 @@
     <title>OPA | RECONHECIMENTO FACIAL</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>Reconhecimento Facial - Operários Pela Arte</h1>
@@ -18,6 +19,12 @@
             <button type="submit">Enviar foto</button>
         </form>
     </div>
+    <h2>Lista de Presenças</h2>
+    <ul id="listaPresenca">
+
+    </ul>
+
+    <button id="btnEnviarPDF">Enviar PDF por E-mail</button>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

@@ -1,25 +1,27 @@
-from flask import render_template, request, jsonify
-from . import create_app
+from flask import Blueprint, render_template, request, jsonify
 from .database import salvar_embedding_no_banco, buscar_embeddings_no_banco
 from .face_recognition import gerar_embedding, comparar_faces, carregar_encodings
 from .utils import gerar_pdf, enviar_email
 from datetime import datetime
+import os
 
-app = create_app()
+routes = Blueprint('routes', __name__)
 
 ENCODINGS = carregar_encodings()
 presentes = []
 
-@app.route('/')
+@routes.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/reconhecer', methods=['POST'])
+@routes.route('/reconhecer', methods=['POST'])
 def reconhecer_rosto():
     if 'foto' not in request.files:
         return jsonify({"mensagem": "Nenhuma foto enviada!"}), 400
     
     foto = request.files['foto']
+
+    os.makedirs("temp", exist_ok=True)
 
     foto_path = f"temp/{foto.filename}"
     foto.save(foto_path)
@@ -37,17 +39,25 @@ def reconhecer_rosto():
     
     return jsonify({"mensagem": "Nenhuma correspondência encontrada!"}), 404
 
-@app.route('/gerar_pdf', methods=['GET'])
+@routes.route('/lista_presencas', methods=['GET'])
+def listar_presencas():
+    return jsonify({"presentes": presentes})
+
+@routes.route('/gerar_pdf', methods=['POST'])
 def gerar_pdf_presencas():
     if not presentes:
-        return jsonify({"mensagem": "Nenhuma presença registrada"})
+        return jsonify({"mensagem": "Nenhuma presença registrada!"}), 400
     
-    caminho_pdf = gerar_pdf(presentes)
+    try:
+        # Gera o PDF com a lista de presenças
+        caminho_pdf = gerar_pdf(presentes)
 
-    envio_sucesso = enviar_email(caminho_pdf)
-    if envio_sucesso:
+        # Envia o PDF por e-mail
+        enviar_email(caminho_pdf)
+
+        # Limpa a lista de presenças após o envio
         presentes.clear()
-        return jsonify({"mensagem": f"PDF gerado e enviado para os e-mails"}), 200
-    else:
-        return jsonify({"mensagem": "Erro ao enviar o e-mail"}), 500
-    
+
+        return jsonify({"mensagem": "PDF gerado e enviado com sucesso!"}), 200
+    except Exception as e:
+        return jsonify({"mensagem": f"Erro ao gerar/enviar o PDF: {str(e)}"}), 500

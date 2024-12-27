@@ -5,7 +5,6 @@ from config import Config
 def create_app():
     app = Flask(__name__)
 
-    # Configuração do Flask
     app.config.from_object(Config)
 
     # Inicializar a conexão com o banco de dados dentro do contexto da aplicação
@@ -22,5 +21,8 @@ def create_app():
     # Chama a inicialização do banco ao iniciar a aplicação
     with app.app_context():
         init_db()
+
+    from .routes import routes
+    app.register_blueprint(routes)
 
     return app

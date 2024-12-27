@@ -3,6 +3,14 @@
         {
             "nome": "Rafael Dias",
             "foto": "app/static/img/3x4 rafael.jpg"
+        },
+        {
+            "nome": "Maria Clara",
+            "foto": "app/static/img/maria_clara.jpeg"
+        },
+        {
+            "nome": "Kauan César",
+            "foto":"app/static/img/cesar.jpeg"
         }
     ]
 }

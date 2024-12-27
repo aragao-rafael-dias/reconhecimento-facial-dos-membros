@@ -1,3 +1,6 @@
 /env
 .env
-*.jpg
+
+/app/__pycache__
+
+/__pycache__

@@ -1,6 +1,6 @@
 import face_recognition
 import numpy as np
-from utils import carregar_membros  
+from .utils import carregar_membros  
 import os
 
 def carregar_encodings():

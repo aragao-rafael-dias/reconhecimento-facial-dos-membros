@@ -19,21 +19,27 @@ def gerar_pdf(presentes):
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
 
-    pdf.set_font('Times New Roman', 'B', 16)
+    pdf.set_font('Arial', 'B', 16)
     pdf.cell(200, 10, txt="Lista de Presença - COLETIVO DE ARTES INTEGRADAS OPERÁRIOS PELA ARTE", ln=True, align='C')
 
-    data_atual = datetime.now().strftime('%d/%m/%Y %H h %M min %S s')
-    pdf.set_font('Times New Roman', '', 12)
+    data_atual = datetime.now().strftime('%d-%m-%Y %H h %M min %S s')
+    pdf.set_font('Arial', '', 12)
     pdf.ln(10)
     pdf.cell(200, 10, txt=f"Data: {data_atual}", ln=True, align='L')
 
     for presente in presentes:
-        nome = presente['nome']
-        data = presente['data']
+        nome = presente.get('nome', 'Desconhecido')
+        data = data_atual
         pdf.cell(200, 10, txt=f"{nome} - {data}", ln=True, align='L')
 
-    caminho_pdf = f"app/static/pdf/presencas_{data_atual.replace(' ', '_').replace(':', '-')}.pdf"
+    pasta_pdf = 'app/static/pdf'
+
+    if not os.path.exists(pasta_pdf):
+        os.makedirs(pasta_pdf)
+
+    caminho_pdf = os.path.join(pasta_pdf, f"presencas_{data_atual.replace(' ', '_').replace(':', '-')}.pdf")
     pdf.output(caminho_pdf)
+    return caminho_pdf
 
 def enviar_email(pdf_path):
     with open('app/static/json/email.json', 'r') as f:
@@ -41,7 +47,7 @@ def enviar_email(pdf_path):
 
     sender_email = email
     sender_password = senha
-    data_atual = datetime.now().strftime('%d/%m/%Y %H h %M min %S s')
+    data_atual = datetime.now().strftime('%d-%m-%Y %H h %M min %S s')
 
     for recipient_email in emails:
         msg = MIMEMultipart()
